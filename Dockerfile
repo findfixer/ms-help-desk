@@ -29,4 +29,3 @@ COPY package*.json ./
 ADD ./build/ ./
 RUN npm ci --production
 EXPOSE 8034
-CMD [ "node", "server.js" ]
