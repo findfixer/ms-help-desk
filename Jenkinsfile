@@ -12,7 +12,7 @@ pipeline {
 
     stage('Install dependencies') {
       steps {
-        sh 'npm install'
+        sh 'npm ci'
       }
     }
 
@@ -21,6 +21,18 @@ pipeline {
          sh 'npm run test'
       }
     }           
+
+    stage('Node Ace Migration') {
+      steps {
+         sh 'node ace migration:run'
+      }
+    }
+
+    stage('Node Ace DB Seed') {
+      steps {
+         sh 'node ace db:seed'
+      }
+    }
 
     stage('Build Node') {
       steps {
