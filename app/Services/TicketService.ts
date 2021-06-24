@@ -1,17 +1,13 @@
-import { isNull } from 'lodash'
 import Event from '@ioc:Adonis/Core/Event'
 
 import Ticket from 'App/Models/Ticket'
-import TicketTransform from 'App/Transforms/TicketTransform'
-import { exception } from 'console'
-import AuthManager from '@ioc:Adonis/Addons/Auth'
 import TicketStatusEnum from 'App/enums/TicketStatusEnum'
-import { Exception } from '@poppinss/utils'
-import ChangeStatusToPending from 'App/Actions/changeStatusToPending'
-import ChangeStatusToInProgress from 'App/Actions/ChangeStatusToInProgress'
-import ChangeStatusToPaused from 'App/Actions/ChangeStatusToPaused'
-import ChangeStatusToInReview from 'App/Actions/ChangeStatusToInReview'
+import TicketTransform from 'App/Transforms/TicketTransform'
 import ChangeStatusToDone from 'App/Actions/ChangeStatusToDone'
+import ChangeStatusToPaused from 'App/Actions/ChangeStatusToPaused'
+import ChangeStatusToPending from 'App/Actions/changeStatusToPending'
+import ChangeStatusToInReview from 'App/Actions/ChangeStatusToInReview'
+import ChangeStatusToInProgress from 'App/Actions/ChangeStatusToInProgress'
 
 /**
  *

@@ -13,20 +13,20 @@ export default class ChangeStatusToInReview {
   /**
    *
    *
-   * @private
+   * @public
    * @type {*}
    * @memberof ChangeStatusToInReview
    */
-  private user: any
+  public user: any
 
   /**
    *
    *
-   * @private
+   * @public
    * @type {Ticket}
    * @memberof ChangeStatusToInReview
    */
-  private ticket: Ticket
+  public ticket: Ticket
 
   /**
    * Creates an instance of ChangeStatusToInReview.

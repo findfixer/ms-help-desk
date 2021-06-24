@@ -1,11 +1,11 @@
-import { Exception } from '@poppinss/utils'
-import ChangeStatusToInProgress from 'App/Actions/ChangeStatusToInProgress'
+import test from 'japa'
+
+import Ticket from 'App/Models/Ticket'
+import TicketStatusEnum from 'App/enums/TicketStatusEnum'
+import ChangeStatusToDone from 'App/Actions/ChangeStatusToDone'
 import ChangeStatusToPaused from 'App/Actions/ChangeStatusToPaused'
 import ChangeStatusToPending from 'App/Actions/ChangeStatusToPending'
-import ChangeStatusToDone from 'App/Actions/ChangeStatusToDone'
-import TicketStatusEnum from 'App/enums/TicketStatusEnum'
-import Ticket from 'App/Models/Ticket'
-import test from 'japa'
+import ChangeStatusToInProgress from 'App/Actions/ChangeStatusToInProgress'
 
 test.group('Alterações de Status do Ticket para Pendente', () => {
   test('Alterado de Pendente para Pendente', (assert) => {
@@ -58,21 +58,21 @@ test.group('Alterações de Status do Ticket para Em Progresso', () => {
     assert.equal(error.message, 'Um chamado já iniciado não pode voltar ficar como pendente.')
   })
 
-  test('Alterado de Em Progresso para Em Progresso', (assert) => {
+  test('Alterado de Em Progresso para Em Progresso', () => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.InProgress
 
     new ChangeStatusToInProgress(ticket, {}).run()
   })
 
-  test('Alterado de Pausado para Em Progresso', (assert) => {
+  test('Alterado de Pausado para Em Progresso', () => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Paused
 
     new ChangeStatusToInProgress(ticket, {}).run()
   })
 
-  test('Alterado de Em Homologação para Em Progresso', (assert) => {
+  test('Alterado de Em Homologação para Em Progresso', () => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.InReview
 
@@ -89,28 +89,28 @@ test.group('Alterações de Status do Ticket para Em Progresso', () => {
 })
 
 test.group('Alterações de Status do Ticket para Pausada', () => {
-  test('Alterado de Pendente para Pausada', (assert) => {
+  test('Alterado de Pendente para Pausada', () => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Pending
 
     new ChangeStatusToPaused(ticket, {}).run()
   })
 
-  test('Alterado de En Progresso para Pausada', (assert) => {
+  test('Alterado de En Progresso para Pausada', () => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.InProgress
 
     new ChangeStatusToPaused(ticket, {}).run()
   })
 
-  test('Alterado de Pausado para Pausada', (assert) => {
+  test('Alterado de Pausado para Pausada', () => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Paused
 
     new ChangeStatusToPaused(ticket, {}).run()
   })
 
-  test('Alterado de Em Homologação para Pausada', (assert) => {
+  test('Alterado de Em Homologação para Pausada', () => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.InReview
 
@@ -127,28 +127,28 @@ test.group('Alterações de Status do Ticket para Pausada', () => {
 })
 
 test.group('Alterações de Status do Ticket para Em Homologação', () => {
-  test('Alterado de Pendente para Em Homologação', (assert) => {
+  test('Alterado de Pendente para Em Homologação', () => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Pending
 
     new ChangeStatusToPaused(ticket, {}).run()
   })
 
-  test('Alterado de Em Progresso para Em Homologação', (assert) => {
+  test('Alterado de Em Progresso para Em Homologação', () => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.InProgress
 
     new ChangeStatusToPaused(ticket, {}).run()
   })
 
-  test('Alterado de Pausado para Em Homologação', (assert) => {
+  test('Alterado de Pausado para Em Homologação', () => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Paused
 
     new ChangeStatusToPaused(ticket, {}).run()
   })
 
-  test('Alterado de Em Homologação para Em Homologação', (assert) => {
+  test('Alterado de Em Homologação para Em Homologação', () => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.InReview
 
@@ -165,35 +165,35 @@ test.group('Alterações de Status do Ticket para Em Homologação', () => {
 })
 
 test.group('Alterações de Status do Ticket para Concluido', () => {
-  test('Alterado de Pendente para Concluido', (assert) => {
+  test('Alterado de Pendente para Concluido', () => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Pending
 
     new ChangeStatusToDone(ticket, {}).run()
   })
 
-  test('Alterado de Em Progresso para Concluido', (assert) => {
+  test('Alterado de Em Progresso para Concluido', () => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.InProgress
 
     new ChangeStatusToDone(ticket, {}).run()
   })
 
-  test('Alterado de Pausado para Concluido', (assert) => {
+  test('Alterado de Pausado para Concluido', () => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Paused
 
     new ChangeStatusToDone(ticket, {}).run()
   })
 
-  test('Alterado de Em Homologação para Concluido', (assert) => {
+  test('Alterado de Em Homologação para Concluido', () => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.InReview
 
     new ChangeStatusToDone(ticket, {}).run()
   })
 
-  test('Alterado de Concluído para Concluido', (assert) => {
+  test('Alterado de Concluído para Concluido', () => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Done
 

@@ -13,20 +13,20 @@ export default class ChangeStatusToInProgress {
   /**
    *
    *
-   * @private
+   * @public
    * @type {*}
    * @memberof ChangeStatusToInProgress
    */
-  private user: any
+  public user: any
 
   /**
    *
    *
-   * @private
+   * @public
    * @type {Ticket}
    * @memberof ChangeStatusToInProgress
    */
-  private ticket: Ticket
+  public ticket: Ticket
 
   /**
    * Creates an instance of ChangeStatusToInProgress.

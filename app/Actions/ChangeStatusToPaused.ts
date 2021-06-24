@@ -13,20 +13,20 @@ export default class ChangeStatusToPaused {
   /**
    *
    *
-   * @private
+   * @public
    * @type {*}
    * @memberof ChangeStatusToPaused
    */
-  private user: any
+  public user: any
 
   /**
    *
    *
-   * @private
+   * @public
    * @type {Ticket}
    * @memberof ChangeStatusToPaused
    */
-  private ticket: Ticket
+  public ticket: Ticket
 
   /**
    * Creates an instance of ChangeStatusToPaused.

@@ -1,6 +1,6 @@
+import kafka from 'Config/kafka'
 import Ticket from 'App/Models/Ticket'
 import TicketStatusEnum from 'App/enums/TicketStatusEnum'
-import kafka from 'Config/kafka'
 
 /**
  *
@@ -16,7 +16,7 @@ export default class ChangeStatusToDone {
    * @type {*}
    * @memberof ChangeStatusToDone
    */
-  private user: any
+  public user: any
 
   /**
    *
@@ -25,7 +25,7 @@ export default class ChangeStatusToDone {
    * @type {Ticket}
    * @memberof ChangeStatusToDone
    */
-  private ticket: Ticket
+  public ticket: Ticket
 
   /**
    * Creates an instance of ChangeStatusToDone.

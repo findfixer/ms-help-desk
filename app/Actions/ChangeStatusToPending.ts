@@ -11,20 +11,20 @@ export default class ChangeStatusToPending {
   /**
    *
    *
-   * @private
+   * @public
    * @type {*}
    * @memberof ChangeStatusToPending
    */
-  private user: any
+  public user: any
 
   /**
    *
    *
-   * @private
+   * @public
    * @type {Ticket}
    * @memberof ChangeStatusToPending
    */
-  private ticket: Ticket
+  public ticket: Ticket
 
   /**
    * Creates an instance of ChangeStatusToPending.
