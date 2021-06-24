@@ -5,7 +5,7 @@ import TicketStatusEnum from 'App/enums/TicketStatusEnum'
 import TicketTransform from 'App/Transforms/TicketTransform'
 import ChangeStatusToDone from 'App/Actions/ChangeStatusToDone'
 import ChangeStatusToPaused from 'App/Actions/ChangeStatusToPaused'
-import ChangeStatusToPending from 'App/Actions/changeStatusToPending'
+import ChangeStatusToPending from 'App/Actions/ChangeStatusToPending'
 import ChangeStatusToInReview from 'App/Actions/ChangeStatusToInReview'
 import ChangeStatusToInProgress from 'App/Actions/ChangeStatusToInProgress'
 
