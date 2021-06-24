@@ -24,5 +24,6 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY package*.json ./
 COPY ./build/* ./
+COPY script.sh ./
 RUN npm ci
 EXPOSE 8034
