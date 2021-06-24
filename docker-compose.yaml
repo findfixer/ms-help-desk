@@ -12,4 +12,4 @@ services:
       - network-docker      
 networks:
   network-docker:
-    driver: bridge
+    external: true
