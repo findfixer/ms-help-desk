@@ -26,7 +26,7 @@ ENV CACHE_VIEWS=false
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY package*.json ./
-COPY ./build/* ./
+ADD ./build/ ./
 RUN npm ci --production
 EXPOSE 8034
 CMD [ "node", "server.js" ]
