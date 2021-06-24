@@ -18,12 +18,11 @@ ENV PG_DB_NAME=db_ms_helpdesk
 
 ENV KAFKA_SERVER=http://kafka:9092
 
-ENV CONSUL_SERVER=consul-server1
-ENV CONSUL_PORT=8500
 ENV CACHE_VIEWS=false
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
-COPY . /usr/src/app
-RUN npm install
+COPY package*.json /usr/src/app
+COPY ./build/* /usr/src/app
+RUN npm ci
 EXPOSE 8034
