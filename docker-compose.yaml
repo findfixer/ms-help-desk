@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  ms-help-desk:
+    image: findfixer/ms-help-desk:latest
+    container_name: ms-help-desk
+    hostname: ms-help-desk
+    restart: always
+    ports:
+      - 8034:8034
+    networks:
+      - network-docker      
+networks:
+  network-docker:
+    driver: bridge
