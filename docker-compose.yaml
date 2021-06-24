@@ -9,7 +9,8 @@ services:
     ports:
       - 8034:8034
     networks:
-      - network-docker      
+      - network-docker    
 networks:
   network-docker:
     external: true
+    name: project-fiap
