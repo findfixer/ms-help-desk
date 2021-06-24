@@ -22,7 +22,7 @@ ENV CACHE_VIEWS=false
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
-COPY package*.json /usr/src/app
-COPY ./build/* /usr/src/app
+COPY package*.json ./
+COPY ./build/* ./
 RUN npm ci
 EXPOSE 8034
