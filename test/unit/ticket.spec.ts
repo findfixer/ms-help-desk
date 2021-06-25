@@ -6,197 +6,238 @@ import ChangeStatusToDone from 'App/Actions/ChangeStatusToDone'
 import ChangeStatusToPaused from 'App/Actions/ChangeStatusToPaused'
 import ChangeStatusToPending from 'App/Actions/ChangeStatusToPending'
 import ChangeStatusToInProgress from 'App/Actions/ChangeStatusToInProgress'
+import ChangeStatusToInReview from 'App/Actions/ChangeStatusToInReview'
 
 test.group('Alterações de Status do Ticket para Pendente', () => {
-  test('Alterado de Pendente para Pendente', (assert) => {
+  test('Alterado de Pendente para Pendente', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Pending
 
-    const result: any = assert.throw(() => new ChangeStatusToPending(ticket, {}).run())
-    assert.equal(result.message, 'O Status não pode ser mudado para pendente.')
+    try {
+      await new ChangeStatusToPending(ticket, {}).run()
+    } catch (e) {
+      assert.equal(e.message, 'O Status não pode ser mudado para pendente.')
+    }
   })
 
-  test('Alterado de Em Progresso para Pendente', (assert) => {
+  test('Alterado de Em Progresso para Pendente', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.InProgress
 
-    const result: any = assert.throw(() => new ChangeStatusToPending(ticket, {}).run())
-    assert.equal(result.message, 'O Status não pode ser mudado para pendente.')
+    try {
+      await new ChangeStatusToPending(ticket, {}).run()
+    } catch (e) {
+      assert.equal(e.message, 'O Status não pode ser mudado para pendente.')
+    }
   })
 
-  test('Alterado de Pausado para Pendente', (assert) => {
+  test('Alterado de Pausado para Pendente', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Paused
 
-    const result: any = assert.throw(() => new ChangeStatusToPending(ticket, {}).run())
-    assert.equal(result.message, 'O Status não pode ser mudado para pendente.')
+    try {
+      await new ChangeStatusToPending(ticket, {}).run()
+    } catch (e) {
+      assert.equal(e.message, 'O Status não pode ser mudado para pendente.')
+    }
   })
 
-  test('Alterado de Em Homologação para Pendente', (assert) => {
+  test('Alterado de Em Homologação para Pendente', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.InReview
 
-    const result: any = assert.throw(() => new ChangeStatusToPending(ticket, {}).run())
-    assert.equal(result.message, 'O Status não pode ser mudado para pendente.')
+    try {
+      await new ChangeStatusToPending(ticket, {}).run()
+    } catch (e) {
+      assert.equal(e.message, 'O Status não pode ser mudado para pendente.')
+    }
   })
 
-  test('Alterado de Concluído para Pendente', (assert) => {
+  test('Alterado de Concluído para Pendente', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Done
 
-    const result: any = assert.throw(() => new ChangeStatusToPending(ticket, {}).run())
-    assert.equal(result.message, 'O Status não pode ser mudado para pendente.')
+    try {
+      await new ChangeStatusToPending(ticket, {}).run()
+    } catch (e) {
+      assert.equal(e.message, 'O Status não pode ser mudado para pendente.')
+    }
   })
 })
 
 test.group('Alterações de Status do Ticket para Em Progresso', () => {
-  test('Alterado de Pendente para Em Progresso', (assert) => {
+  test('Alterado de Pendente para Em Progresso', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Pending
 
-    const error: any = assert.throw(() => new ChangeStatusToInProgress(ticket, {}).run())
-    assert.equal(error.message, 'Um chamado já iniciado não pode voltar ficar como pendente.')
+    const ticketResult = await new ChangeStatusToInProgress(ticket, {}).run()
+    assert.equal(ticketResult.ticketStatusId, TicketStatusEnum.InProgress)
   })
 
-  test('Alterado de Em Progresso para Em Progresso', () => {
+  test('Alterado de Em Progresso para Em Progresso', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.InProgress
 
-    new ChangeStatusToInProgress(ticket, {}).run()
+    const ticketResult = await new ChangeStatusToInProgress(ticket, {}).run()
+    assert.equal(ticketResult.ticketStatusId, TicketStatusEnum.InProgress)
   })
 
-  test('Alterado de Pausado para Em Progresso', () => {
+  test('Alterado de Pausado para Em Progresso', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Paused
 
-    new ChangeStatusToInProgress(ticket, {}).run()
+    const ticketResult = await new ChangeStatusToInProgress(ticket, {}).run()
+    assert.equal(ticketResult.ticketStatusId, TicketStatusEnum.InProgress)
   })
 
-  test('Alterado de Em Homologação para Em Progresso', () => {
+  test('Alterado de Em Homologação para Em Progresso', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.InReview
 
-    new ChangeStatusToInProgress(ticket, {}).run()
+    const ticketResult = await new ChangeStatusToInProgress(ticket, {}).run()
+    assert.equal(ticketResult.ticketStatusId, TicketStatusEnum.InProgress)
   })
 
-  test('Alterado de Concluído para Em Progresso', (assert) => {
+  test('Alterado de Concluído para Em Progresso', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Done
 
-    const error: any = assert.throw(() => new ChangeStatusToInProgress(ticket, {}).run())
-    assert.equal(error.message, 'Um chamado não pode ser reaberto.')
+    try {
+      await new ChangeStatusToInProgress(ticket, {}).run()
+    } catch (e) {
+      assert.equal(e.message, 'Um chamado não pode ser reaberto.')
+    }
   })
 })
 
 test.group('Alterações de Status do Ticket para Pausada', () => {
-  test('Alterado de Pendente para Pausada', () => {
+  test('Alterado de Pendente para Pausada', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Pending
 
-    new ChangeStatusToPaused(ticket, {}).run()
+    const ticketResult = await new ChangeStatusToPaused(ticket, {}).run()
+    assert.equal(ticketResult.ticketStatusId, TicketStatusEnum.Paused)
   })
 
-  test('Alterado de En Progresso para Pausada', () => {
+  test('Alterado de En Progresso para Pausada', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.InProgress
 
-    new ChangeStatusToPaused(ticket, {}).run()
+    const ticketResult = await new ChangeStatusToPaused(ticket, {}).run()
+    assert.equal(ticketResult.ticketStatusId, TicketStatusEnum.Paused)
   })
 
-  test('Alterado de Pausado para Pausada', () => {
+  test('Alterado de Pausado para Pausada', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Paused
 
-    new ChangeStatusToPaused(ticket, {}).run()
+    const ticketResult = await new ChangeStatusToPaused(ticket, {}).run()
+    assert.equal(ticketResult.ticketStatusId, TicketStatusEnum.Paused)
   })
 
-  test('Alterado de Em Homologação para Pausada', () => {
+  test('Alterado de Em Homologação para Pausada', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.InReview
 
-    new ChangeStatusToPaused(ticket, {}).run()
+    const ticketResult = await new ChangeStatusToPaused(ticket, {}).run()
+    assert.equal(ticketResult.ticketStatusId, TicketStatusEnum.Paused)
   })
 
-  test('Alterado de Concluído para Pausada', (assert) => {
+  test('Alterado de Concluído para Pausada', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Done
 
-    const error: any = assert.throw(() => new ChangeStatusToPaused(ticket, {}).run())
-    assert.equal(error.message, 'Um chamado não pode ser reaberto.')
+    try {
+      await new ChangeStatusToPaused(ticket, {}).run()
+    } catch (e) {
+      assert.equal(e.message, 'Um chamado não pode ser reaberto.')
+    }
   })
 })
 
 test.group('Alterações de Status do Ticket para Em Homologação', () => {
-  test('Alterado de Pendente para Em Homologação', () => {
+  test('Alterado de Pendente para Em Homologação', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Pending
 
-    new ChangeStatusToPaused(ticket, {}).run()
+    const ticketResult = await new ChangeStatusToInReview(ticket, {}).run()
+    assert.equal(ticketResult.ticketStatusId, TicketStatusEnum.InReview)
   })
 
-  test('Alterado de Em Progresso para Em Homologação', () => {
+  test('Alterado de Em Progresso para Em Homologação', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.InProgress
 
-    new ChangeStatusToPaused(ticket, {}).run()
+    const ticketResult = await new ChangeStatusToInReview(ticket, {}).run()
+    assert.equal(ticketResult.ticketStatusId, TicketStatusEnum.InReview)
   })
 
-  test('Alterado de Pausado para Em Homologação', () => {
+  test('Alterado de Pausado para Em Homologação', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Paused
 
-    new ChangeStatusToPaused(ticket, {}).run()
+    const ticketResult = await new ChangeStatusToInReview(ticket, {}).run()
+    assert.equal(ticketResult.ticketStatusId, TicketStatusEnum.InReview)
   })
 
-  test('Alterado de Em Homologação para Em Homologação', () => {
+  test('Alterado de Em Homologação para Em Homologação', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.InReview
 
-    new ChangeStatusToPaused(ticket, {}).run()
+    const ticketResult = await new ChangeStatusToInReview(ticket, {}).run()
+    assert.equal(ticketResult.ticketStatusId, TicketStatusEnum.InReview)
   })
 
-  test('Alterado de Concluído para Em Homologação', (assert) => {
+  test('Alterado de Concluído para Em Homologação', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Done
 
-    const error: any = assert.throw(() => new ChangeStatusToPaused(ticket, {}).run())
-    assert.equal(error.message, 'Um chamado não pode ser reaberto.')
+    try {
+      await new ChangeStatusToInReview(ticket, {}).run()
+    } catch (e) {
+      assert.equal(e.message, 'Um chamado não pode ser reaberto.')
+    }
   })
 })
 
 test.group('Alterações de Status do Ticket para Concluido', () => {
-  test('Alterado de Pendente para Concluido', () => {
+  test('Alterado de Pendente para Concluido', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Pending
 
-    new ChangeStatusToDone(ticket, {}).run()
+    const ticketResult = await new ChangeStatusToDone(ticket, {}).run()
+    assert.equal(ticketResult.ticketStatusId, TicketStatusEnum.Done)
   })
 
-  test('Alterado de Em Progresso para Concluido', () => {
+  test('Alterado de Em Progresso para Concluido', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.InProgress
 
-    new ChangeStatusToDone(ticket, {}).run()
+    const ticketResult = await new ChangeStatusToDone(ticket, {}).run()
+    assert.equal(ticketResult.ticketStatusId, TicketStatusEnum.Done)
   })
 
-  test('Alterado de Pausado para Concluido', () => {
+  test('Alterado de Pausado para Concluido', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Paused
 
-    new ChangeStatusToDone(ticket, {}).run()
+    const ticketResult = await new ChangeStatusToDone(ticket, {}).run()
+    assert.equal(ticketResult.ticketStatusId, TicketStatusEnum.Done)
   })
 
-  test('Alterado de Em Homologação para Concluido', () => {
+  test('Alterado de Em Homologação para Concluido', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.InReview
 
-    new ChangeStatusToDone(ticket, {}).run()
+    const ticketResult = await new ChangeStatusToDone(ticket, {}).run()
+    assert.equal(ticketResult.ticketStatusId, TicketStatusEnum.Done)
   })
 
-  test('Alterado de Concluído para Concluido', () => {
+  test('Alterado de Concluído para Concluido', async (assert) => {
     const ticket = new Ticket()
     ticket.ticketStatusId = TicketStatusEnum.Done
 
-    new ChangeStatusToDone(ticket, {}).run()
+    const ticketResult = await new ChangeStatusToDone(ticket, {}).run()
+    assert.equal(ticketResult.ticketStatusId, TicketStatusEnum.Done)
   })
 })
