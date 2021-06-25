@@ -16,12 +16,6 @@ pipeline {
       }
     }
 
-    stage('Test') {
-      steps {
-         sh 'npm run test'
-      }
-    }           
-
     stage('Node Ace Migration') {
       steps {
          sh 'node ace migration:run'
@@ -33,6 +27,12 @@ pipeline {
          sh 'node ace db:seed'
       }
     }
+
+    stage('Test') {
+      steps {
+         sh 'npm run test'
+      }
+    }           
 
     stage('Build Node') {
       steps {
