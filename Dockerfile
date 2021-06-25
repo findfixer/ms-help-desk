@@ -28,6 +28,5 @@ WORKDIR /usr/src/app
 COPY . ./
 WORKDIR /usr/src/app/build
 RUN npm ci --production
-RUN npm install
 EXPOSE 8034
 CMD [ "node", "server.js" ]
