@@ -28,7 +28,7 @@ Route.get('/health', async ({ response }) => {
 
 Route.group(() => {
   Route.resource('tickets', 'TicketController')
-  Route.put('tickets/:id/change-status', 'TicketController@changeStatus')
+  Route.put('tickets/:id/change-status', 'TicketController.changeStatus')
 })
   // .middleware('auth:api')
   .prefix('api')

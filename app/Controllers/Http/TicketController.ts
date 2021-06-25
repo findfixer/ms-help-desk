@@ -3,6 +3,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Ticket from 'App/Models/Ticket'
 import TicketService from 'App/Services/TicketService'
 import TicketCreateValidator from 'App/Validators/TicketCreateValidator'
+import TicketUpdateValidator from 'App/Validators/TicketUpdateValidator'
 
 /**
  *
@@ -55,9 +56,12 @@ export default class TicketController {
    * @memberof TicketController
    */
   public async update(ctx: HttpContextContract): Promise<Ticket | string> {
-    await ctx.request.validate(TicketCreateValidator)
+    await ctx.request.validate(TicketUpdateValidator)
 
-    return await TicketService.update(ctx.request.param('id'), ctx.request.body())
+    const body = ctx.request.body()
+    delete body['ticket_status_id']
+
+    return await TicketService.update(ctx.request.param('id'), body)
   }
 
   /**
@@ -71,11 +75,38 @@ export default class TicketController {
     return await TicketService.destroy(ctx.request.param('id'))
   }
 
+  /**
+   *
+   *
+   * @param {HttpContextContract} ctx
+   * @return {*}  {Promise<any>}
+   * @memberof TicketController
+   */
   public async changeStatus(ctx: HttpContextContract): Promise<any> {
     const statusTicketId = ctx.request.body()['ticket_status_id']
 
-    if (statusTicketId) return
+    if (this.isNotValidStatus(statusTicketId)) return 'Ticket status Id invalid!'
 
     return await TicketService.changeStatus(ctx.request.param('id'), statusTicketId, ctx.auth)
+  }
+
+  /**
+   *
+   *
+   * @private
+   * @param {*} statusTicketId
+   * @return {*}  {boolean}
+   * @memberof TicketController
+   */
+  private isNotValidStatus(statusTicketId: number): boolean {
+    if (!Number.isInteger(statusTicketId)) {
+      return true
+    }
+
+    if (statusTicketId < 1 || statusTicketId > 5) {
+      return true
+    }
+
+    return false
   }
 }

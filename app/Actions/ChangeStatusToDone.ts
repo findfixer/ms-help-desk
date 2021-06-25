@@ -41,12 +41,15 @@ export default class ChangeStatusToDone {
   /**
    *
    *
+   * @return {*}
    * @memberof ChangeStatusToDone
    */
-  public run() {
+  public async run() {
     this.ticket.ticketStatusId = TicketStatusEnum.Done
 
-    this.ticket.save()
-    kafka.produce('ticket:change-status', this.ticket)
+    const ticket = await this.ticket.save()
+    kafka.produce('ticket.change-status', JSON.stringify(this.ticket))
+
+    return ticket
   }
 }

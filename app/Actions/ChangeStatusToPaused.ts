@@ -42,16 +42,19 @@ export default class ChangeStatusToPaused {
   /**
    *
    *
+   * @return {*}
    * @memberof ChangeStatusToPaused
    */
-  public run() {
+  public async run() {
     if (this.ticket.ticketStatusId === TicketStatusEnum.Done) {
       throw new Exception('Um chamado não pode ser reaberto.')
     }
 
     this.ticket.ticketStatusId = TicketStatusEnum.Paused
 
-    this.ticket.save()
-    kafka.produce('ticket:change-status', this.ticket)
+    const ticket = await this.ticket.save()
+    kafka.produce('ticket.change-status', JSON.stringify(this.ticket))
+
+    return ticket
   }
 }

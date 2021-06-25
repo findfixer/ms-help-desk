@@ -42,7 +42,7 @@ export default class ChangeStatusToPending {
    *
    * @memberof ChangeStatusToPending
    */
-  public run() {
+  public async run() {
     throw new Exception('O Status não pode ser mudado para pendente.')
   }
 }

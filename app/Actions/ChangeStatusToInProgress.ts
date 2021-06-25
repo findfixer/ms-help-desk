@@ -42,20 +42,19 @@ export default class ChangeStatusToInProgress {
   /**
    *
    *
+   * @return {*}
    * @memberof ChangeStatusToInProgress
    */
-  public run() {
+  public async run() {
     if (this.ticket.ticketStatusId === TicketStatusEnum.Done) {
       throw new Exception('Um chamado não pode ser reaberto.')
     }
 
-    if (this.ticket.ticketStatusId === TicketStatusEnum.Pending) {
-      throw new Exception('Um chamado já iniciado não pode voltar ficar como pendente.')
-    }
-
     this.ticket.ticketStatusId = TicketStatusEnum.InProgress
 
-    this.ticket.save()
-    kafka.produce('ticket:change-status', this.ticket)
+    const ticket = await this.ticket.save()
+    kafka.produce('ticket.change-status', JSON.stringify(this.ticket))
+
+    return ticket
   }
 }

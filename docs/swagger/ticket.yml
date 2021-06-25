@@ -192,6 +192,77 @@
                     description:
                       type: string
                       example: Aberto
+  
+  put:
+    tags:
+      - Tickets
+    security: []
+    description: Alteração de chamado
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: Id do chamado a ser alterado.
+        schema:
+          type : number
+          format: int64
+          minimum: 1
+    produces:
+      - application/json
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                example: Erro ao logar
+              description:
+                type: string
+                example: Ao logar na minha conta, da erro
+              customer_id:
+                type: number
+                example: 1
+              assigner_id:
+                type: number
+                example: 1
+              ticket_category_id:
+                type: number
+                example: 1
+    responses:
+      '200':
+        description: Altera um chamado baseando-se no id.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                  example: 1
+                created_at:
+                  type: string
+                  example: 2021-06-04T22:02:01.010-03:00
+                updated_at:
+                  type: string
+                  example: 2021-06-04T22:02:02.539-03:00
+                title:
+                  type: string
+                  example: Erro ao logar
+                description:
+                  type: string
+                  example: Ao logar na minha conta, da erro
+                customer_id:
+                  type: number
+                  example: 1
+                assigner_id:
+                  type: number
+                  example: 1
+                ticket_category_id:
+                  type: number
+                  example: 1
 
   delete:
     tags:
@@ -245,3 +316,68 @@
                   type: number
                   example: 1
 
+
+/api/tickets/{id}/change-status:
+  put:
+    tags:
+      - Tickets
+    security: []
+    description: "Alteração de Status do Ticket; 
+      Pendente -> ID 1;
+      Em Progresso -> ID 2;
+      Pausada -> ID 3;
+      Em Homologação -> ID 4;
+      Concluído -> ID 5;"
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: Id do chamado a ter o status alterado.
+        schema:
+          type : number
+          format: int64
+          minimum: 1
+    produces:
+      - application/json
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ticket_status_id:
+                type: number
+                example: 2
+    responses:
+      '200':
+        description: Status Alterado
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                  example: 1
+                created_at:
+                  type: string
+                  example: 2021-06-04T22:02:01.010-03:00
+                updated_at:
+                  type: string
+                  example: 2021-06-04T22:02:02.539-03:00
+                title:
+                  type: string
+                  example: Erro ao logar
+                description:
+                  type: string
+                  example: Ao logar na minha conta, da erro
+                customer_id:
+                  type: number
+                  example: 1
+                assigner_id:
+                  type: number
+                  example: 1
+                ticket_category_id:
+                  type: number
+                  example: 1

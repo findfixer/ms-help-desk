@@ -111,20 +111,15 @@ export default class TicketService {
 
     switch (statusTypeId) {
       case TicketStatusEnum.Pending:
-        new ChangeStatusToPending(ticket, user).run()
-        break
+        return await new ChangeStatusToPending(ticket, user).run()
       case TicketStatusEnum.InProgress:
-        new ChangeStatusToInProgress(ticket, user).run()
-        break
+        return await new ChangeStatusToInProgress(ticket, user).run()
       case TicketStatusEnum.Paused:
-        new ChangeStatusToPaused(ticket, user).run()
-        break
+        return await new ChangeStatusToPaused(ticket, user).run()
       case TicketStatusEnum.InReview:
-        new ChangeStatusToInReview(ticket, user).run()
-        break
+        return await new ChangeStatusToInReview(ticket, user).run()
       case TicketStatusEnum.Done:
-        new ChangeStatusToDone(ticket, user).run()
-        break
+        return await new ChangeStatusToDone(ticket, user).run()
     }
   }
 }
